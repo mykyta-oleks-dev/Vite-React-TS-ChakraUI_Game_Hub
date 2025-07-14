@@ -4,19 +4,21 @@ This is a project of a videogames discovery website "Game Hub" inspired by RAWG 
 
 ## Technologies used
 
--   TypeScript - a strongly typed programming language that builds on JavaScript.
+- TypeScript - a strongly typed programming language that builds on JavaScript.
 
--   Node.JS - free, open-source, cross-platform JavaScript runtime environment.
+- Node.JS - free, open-source, cross-platform JavaScript runtime environment.
 
--   npm - package manager for the JavaScript programming language maintained by npm, Inc., a subsidiary of GitHub.
+- npm - package manager for the JavaScript programming language maintained by npm, Inc., a subsidiary of GitHub.
 
--   React - a free and open-source front-end JavaScript library for building user interfaces.
+- React - a free and open-source front-end JavaScript library for building user interfaces.
 
--   Vite - a build tool and development server for modern JavaScript projects, designed to provide a fast and lean development experience.
+- Vite - a build tool and development server for modern JavaScript projects, designed to provide a fast and lean development experience.
 
--   Prettier - an opinionated code formatter that enforces a consistent style by parsing your code and re-printing it with its own rules.
+- Prettier - an opinionated code formatter that enforces a consistent style by parsing your code and re-printing it with its own rules.
 
--   ESLint - a pluggable linting utility for JavaScript and TypeScript, used to identify and fix problems in the code. Plugins extend ESLint's functionality to support additional rules, frameworks, or coding styles.
+- ESLint - a pluggable linting utility for JavaScript and TypeScript, used to identify and fix problems in the code. Plugins extend ESLint's functionality to support additional rules, frameworks, or coding styles.
+
+- Chakra UI - an open-source component library for React for building web apps and design systems
 
 Later will be updated with the addition of other technologies used.
 
