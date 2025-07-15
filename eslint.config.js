@@ -34,6 +34,11 @@ export default tseslint.config([
 			],
 			'prettier/prettier': 'warn',
 		},
-		ignores: ['./node_modules', './build/', './dist/'],
+		ignores: [
+			'./node_modules',
+			'./build/',
+			'./dist/',
+			'./src/components/ui/*',
+		],
 	},
 ]);

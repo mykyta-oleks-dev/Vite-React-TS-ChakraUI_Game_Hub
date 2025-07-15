@@ -1,27 +1,34 @@
-import { Grid, GridItem } from '@chakra-ui/react';
+import { Container, Grid, GridItem } from '@chakra-ui/react';
+import NavBar from './components/NavBar';
+import GameGrid from './components/main/GameGrid';
 
 function App() {
 	return (
-		<Grid
-			templateAreas={{
-				base: `"nav" "main"`,
-				lg: `"nav nav" "aside main"`,
-			}}
-		>
-			<GridItem area="nav" bg="blue.500">
-				Navigation
-			</GridItem>
-			<GridItem
-				area="aside"
-				bg="green.500"
-				display={{ base: 'none', lg: 'block' }}
+		<Container maxW="container.xl">
+			<Grid
+				templateAreas={{
+					base: '"nav" "main"',
+					lg: '"nav nav" "aside main"',
+				}}
+				templateColumns={{ base: '1fr', lg: '1fr 3fr' }}
+				gap={4}
 			>
-				Sidebar
-			</GridItem>
-			<GridItem area="main" bg="red.500">
-				Main Content
-			</GridItem>
-		</Grid>
+				<GridItem area="nav" as="header">
+					<NavBar />
+				</GridItem>
+				<GridItem
+					area="aside"
+					bg="green.500"
+					display={{ base: 'none', lg: 'block' }}
+					as="aside"
+				>
+					Sidebar
+				</GridItem>
+				<GridItem area="main" bg="red.500" as="main">
+					<GameGrid />
+				</GridItem>
+			</Grid>
+		</Container>
 	);
 }
 
