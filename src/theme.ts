@@ -9,7 +9,7 @@ const config = defineConfig({
 			colors: {
 				bg: {
 					DEFAULT: {
-						value: { _light: '{colors.white}', _dark: '#141414' },
+						value: { _light: '{colors.white}', _dark: '#303030' },
 					},
 				},
 				fg: {

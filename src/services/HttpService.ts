@@ -6,7 +6,7 @@ class HttpService<T, R> {
 		this.url = url;
 	}
 
-	getAll(page = 1, pageSize = 10) {
+	getAll(page = 1, pageSize = 12) {
 		const pageParam = page > 0 ? page : 1;
 		const pageSizeParam = pageSize > 0 ? pageSize : 10;
 
