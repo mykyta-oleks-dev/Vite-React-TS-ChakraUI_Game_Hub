@@ -37,7 +37,7 @@ $ npm install
 To run the application in development mode:
 
 ```shell
-$ npm run start
+$ npm run dev
 ```
 
 To build the project files perform Typescript transpilation:
