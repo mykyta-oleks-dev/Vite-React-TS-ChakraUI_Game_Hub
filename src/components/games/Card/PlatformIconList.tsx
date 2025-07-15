@@ -1,4 +1,4 @@
-import type { Platform } from '@/services/GamesService';
+import type { Platform } from '@/services/http/GamesService';
 import { Box, HStack, Icon, Text } from '@chakra-ui/react';
 import type { IconType } from 'react-icons';
 import { BsGlobe, BsNintendoSwitch } from 'react-icons/bs';
@@ -29,7 +29,7 @@ const PlatformIconsList = ({ platforms }: Props) => {
 	};
 
 	return (
-		<HStack gap={2}>
+		<HStack gap={2} flexWrap="wrap">
 			{platforms.map((platform) => (
 				<Icon
 					key={platform.id}

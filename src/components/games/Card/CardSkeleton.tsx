@@ -4,7 +4,7 @@ import CardContainer from './CardContainer';
 const CardSkeleton = () => {
 	return (
 		<CardContainer>
-			<Skeleton height="200px" />
+			<Skeleton aspectRatio={6 / 4} />
 			<Card.Body>
 				<SkeletonText noOfLines={2} />
 				<SkeletonText noOfLines={1} marginBlockStart={10} />

@@ -6,7 +6,6 @@ const CriticScore = ({ score }: Readonly<{ score: number }>) => {
 		<Badge
 			colorPalette={color}
 			fontSize="16px"
-			marginInlineStart={1}
 			padding={1}
 			borderRadius={5}
 		>

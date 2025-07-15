@@ -1,19 +1,19 @@
 import apiClient from './api-client';
 
-class HttpService<T, R> {
+class HttpService<T, R extends { results: T[] }> {
 	url: string;
 	constructor(url: string) {
 		this.url = url;
 	}
 
 	getAll(page = 1, pageSize = 12) {
-		const pageParam = page > 0 ? page : 1;
-		const pageSizeParam = pageSize > 0 ? pageSize : 10;
-
 		const controller = new AbortController();
 		const request = apiClient.get<R>(this.url, {
 			signal: controller.signal,
-			params: { page: pageParam, page_size: pageSizeParam },
+			params: {
+				page: page > 0 ? page : undefined,
+				page_size: pageSize > 0 ? pageSize : undefined,
+			},
 		});
 		return { request, cancel: () => controller.abort() };
 	}

@@ -1,6 +1,6 @@
 const getCroppedImageUrl = (url: string, width = 600, height = 400) => {
 	if (!url) return '';
-	return url.match(/media\//)
+	return RegExp(/media\//).exec(url)
 		? url.replace('/media/', `/media/crop/${width}/${height}/`)
 		: url;
 };

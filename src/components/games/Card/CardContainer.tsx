@@ -2,7 +2,7 @@ import { Card } from '@chakra-ui/react';
 
 function CardContainer({ children }: Readonly<{ children: React.ReactNode }>) {
 	return (
-		<Card.Root borderRadius={10} overflow="hidden">
+		<Card.Root borderRadius={10} overflow="hidden" bg="card">
 			{children}
 		</Card.Root>
 	);

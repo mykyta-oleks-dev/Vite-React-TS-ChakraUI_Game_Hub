@@ -1,4 +1,4 @@
-import type { Game } from '@/services/GamesService';
+import type { Game } from '@/services/http/GamesService';
 import { Card, Heading, HStack, Image, Text } from '@chakra-ui/react';
 import { FaStar } from 'react-icons/fa';
 import PlatformIconsList from './PlatformIconList';
@@ -20,7 +20,6 @@ const GameCard = ({ game }: Props) => {
 			<Card.Body display="flex" flexDirection="column">
 				<Heading fontSize="2xl" fontWeight="bold" marginBlockEnd={5}>
 					{game.name}
-					<CriticScore score={game.metacritic ?? 0} />
 				</Heading>
 				<HStack
 					marginBlockStart="auto"
@@ -35,6 +34,7 @@ const GameCard = ({ game }: Props) => {
 						<Text as="span">
 							{game.rating} / {game.rating_top}
 						</Text>
+						<CriticScore score={game.metacritic ?? 0} />
 					</HStack>
 				</HStack>
 			</Card.Body>
