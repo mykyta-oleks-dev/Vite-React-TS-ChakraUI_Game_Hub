@@ -2,7 +2,11 @@ import HttpService from '@/services/http/HttpService';
 import { CanceledError } from 'axios';
 import { useEffect, useState } from 'react';
 
-const useData = <T, R extends { results: T[] }>(service: HttpService<T, R>, page = 1, pageSize = 12) => {
+const useData = <T, R extends { results: T[] }>(
+	service: HttpService<T, R>,
+	page = 1,
+	pageSize = 12
+) => {
 	const [data, setData] = useState<T[]>([]);
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);

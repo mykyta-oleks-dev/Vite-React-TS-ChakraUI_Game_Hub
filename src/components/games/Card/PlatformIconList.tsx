@@ -1,5 +1,5 @@
 import type { Platform } from '@/services/http/GamesService';
-import { Box, HStack, Icon, Text } from '@chakra-ui/react';
+import { HStack, Icon } from '@chakra-ui/react';
 import type { IconType } from 'react-icons';
 import { BsGlobe, BsNintendoSwitch } from 'react-icons/bs';
 import {
