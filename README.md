@@ -20,6 +20,8 @@ This is a project of a videogames discovery website "Game Hub" inspired by RAWG 
 
 - Chakra UI - an open-source component library for React for building web apps and design systems
 
+- Axios - a promise-based HTTP Client for node.js and the browser
+
 Later will be updated with the addition of other technologies used.
 
 ## Installation
