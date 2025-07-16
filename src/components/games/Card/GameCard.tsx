@@ -27,7 +27,10 @@ const GameCard = ({ game }: Props) => {
 					justifyContent="space-between"
 				>
 					<PlatformIconsList
-						platforms={game.parent_platforms.map((p) => p.platform)}
+						parent_platforms={game.parent_platforms.map(
+							(p) => p.platform
+						)}
+						platforms={game.platforms.map((p) => p.platform)}
 					/>
 					<HStack alignItems="center" gap={1} flexShrink={0}>
 						<FaStar color="gold" />

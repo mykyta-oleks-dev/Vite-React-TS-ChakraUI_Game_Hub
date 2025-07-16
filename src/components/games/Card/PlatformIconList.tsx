@@ -1,42 +1,36 @@
-import type { Platform } from '@/services/http/GamesService';
+import { Tooltip } from '@/components/ui/tooltip';
+import type { Platform } from '@/services/http/PlatformsService';
+import { getIcon } from '@/services/platform-icon';
 import { HStack, Icon } from '@chakra-ui/react';
-import type { IconType } from 'react-icons';
-import { BsGlobe, BsNintendoSwitch } from 'react-icons/bs';
-import {
-	FaAndroid,
-	FaApple,
-	FaLinux,
-	FaPlaystation,
-	FaWindows,
-	FaXbox,
-} from 'react-icons/fa';
-import { MdPhoneIphone } from 'react-icons/md';
 
 type Props = Readonly<{
+	parent_platforms: Platform[];
 	platforms: Platform[];
 }>;
-const PlatformIconsList = ({ platforms }: Props) => {
-	const icons: Record<string, IconType> = {
-		pc: FaWindows,
-		playstation: FaPlaystation,
-		xbox: FaXbox,
-		nintendo: BsNintendoSwitch,
-		android: FaAndroid,
-		ios: MdPhoneIphone,
-		mac: FaApple,
-		linux: FaLinux,
-		web: BsGlobe,
-	};
-
+const PlatformIconsList = ({ parent_platforms, platforms }: Props) => {
+	console.log({ parent_platforms, platforms });
 	return (
 		<HStack gap={2} flexWrap="wrap">
-			{platforms.map((platform) => (
-				<Icon
-					key={platform.id}
-					as={icons[platform.slug]}
-					color="gray.500"
-				/>
-			))}
+			{parent_platforms.map((p) => {
+				const tooltipPlatforms: string[] = [];
+				platforms.forEach((device) => {
+					if (device.slug.includes(p.slug)) {
+						tooltipPlatforms.push(device.name);
+					}
+				});
+				if (tooltipPlatforms.length == 0) tooltipPlatforms.push(p.name);
+
+				return (
+					<Tooltip
+						key={p.id}
+						content={tooltipPlatforms.join(', ')}
+						openDelay={300}
+						closeDelay={100}
+					>
+						<Icon as={getIcon(p.slug)} color="gray.500" />
+					</Tooltip>
+				);
+			})}
 		</HStack>
 	);
 };

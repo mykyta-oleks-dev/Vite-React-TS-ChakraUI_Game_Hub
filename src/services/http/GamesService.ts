@@ -1,10 +1,6 @@
 import HttpService from './HttpService';
-
-export interface Platform {
-	id: number;
-	name: string;
-	slug: string;
-}
+import type { Genre } from './GenresService';
+import type { Platform } from './PlatformsService';
 
 export interface Game {
 	id: number;
@@ -26,6 +22,11 @@ export interface GameDetails extends Game {
 export interface GetGamesRequest {
 	count: number;
 	results: Game[];
+}
+
+export interface GameQuery {
+	genre: Genre | null;
+	platforms: Platform[];
 }
 
 class GamesService extends HttpService<Game, GetGamesRequest> {

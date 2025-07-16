@@ -4,16 +4,20 @@ import { useEffect, useState } from 'react';
 
 const useData = <T, R extends { results: T[] }>(
 	service: HttpService<T, R>,
-	page = 1,
-	pageSize = 12
+	page: number,
+	pageSize: number,
+	deps: unknown[],
+	params: Record<string, unknown> = {}
 ) => {
 	const [data, setData] = useState<T[]>([]);
 	const [error, setError] = useState('');
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		setError('');
-		const { request, cancel } = service.getAll(page, pageSize);
+		const { request, cancel } = service.getAll(page, pageSize, {
+			params,
+		});
 		setLoading(true);
 
 		(async () => {
@@ -38,7 +42,7 @@ const useData = <T, R extends { results: T[] }>(
 			cancel();
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, deps);
 
 	return { data, error, loading };
 };

@@ -1,7 +1,14 @@
 import { Badge } from '@chakra-ui/react';
 
+const colorSelector = (score: number) => {
+	if (score > 75) return 'green';
+	if (score > 60) return 'yellow';
+	if (score > 0) return 'red';
+	return 'gray';
+};
+
 const CriticScore = ({ score }: Readonly<{ score: number }>) => {
-	const color = score > 75 ? 'green' : score > 60 ? 'yellow' : 'red';
+	const color = colorSelector(score);
 	return (
 		<Badge
 			colorPalette={color}

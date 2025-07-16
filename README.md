@@ -48,4 +48,10 @@ $ npm run build
 
 ## Features
 
-To be Developed and Described.
+- Theme switch: Switch between the dark and light theme with a click on a button in navigational bar
+
+- Games grid: Explore videogames in a grid structure featuring games' ratings and platforms (12 items maximum at the current implementation)
+
+- Genres and Platforms filters: Adjust filters to search for the games in particular genre or on a specific platform (PlayStation 3, iOS, Nintendo 3DS etc.)
+
+- Responsive design: you can use the application on different screens (genres are hidden for small devices at the current implementation)
