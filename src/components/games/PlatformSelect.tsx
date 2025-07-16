@@ -49,13 +49,10 @@ function PlatformSelect({
 					collection={platforms}
 					value={selectedPlatforms.map((p) => p.slug)}
 					onValueChange={handlePlatformChange}
-					variant="subtle"
 				>
 					<Select.HiddenSelect />
-					<Select.Label>
-						Choose platforms:
-					</Select.Label>
-					<Select.Control>
+					<Select.Label>Choose platforms:</Select.Label>
+					<Select.Control bg="emphasis">
 						<Select.Trigger>
 							<Select.ValueText placeholder="Select Platforms" />
 						</Select.Trigger>

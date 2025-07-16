@@ -2,12 +2,13 @@ import HttpService from '@/services/http/HttpService';
 import { CanceledError } from 'axios';
 import { useEffect, useState } from 'react';
 
-const useData = <T, R extends { results: T[] }>(
+const useData = <T, R extends { results: T[]; count: number }>(
 	service: HttpService<T, R>,
 	deps: unknown[],
 	params: Record<string, unknown> = {}
 ) => {
 	const [data, setData] = useState<T[]>([]);
+	const [count, setCount] = useState(0);
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(true);
 
@@ -19,7 +20,9 @@ const useData = <T, R extends { results: T[] }>(
 		(async () => {
 			try {
 				const data = (await request).data;
+				console.log({ service, data });
 				setData(data.results);
+				setCount(data.count);
 				setLoading(false);
 			} catch (err: unknown) {
 				if (err instanceof CanceledError) return;
@@ -40,7 +43,7 @@ const useData = <T, R extends { results: T[] }>(
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, deps);
 
-	return { data, error, loading };
+	return { data, count, error, loading };
 };
 
 export default useData;

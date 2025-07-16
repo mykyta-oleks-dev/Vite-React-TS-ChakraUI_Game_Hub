@@ -26,11 +26,10 @@ function SortSelect({ sort, onSortSelect: setSort }: PlatformSelectProps) {
 				collection={collection}
 				value={[sort]}
 				onValueChange={(e) => setSort(e.value[0])}
-				variant="subtle"
 			>
 				<Select.HiddenSelect />
 				<Select.Label>Sort by:</Select.Label>
-				<Select.Control>
+				<Select.Control bg="emphasis">
 					<Select.Trigger>
 						<Select.ValueText placeholder="Sort by" />
 					</Select.Trigger>

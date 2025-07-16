@@ -9,7 +9,7 @@ const config = defineConfig({
 			colors: {
 				bg: {
 					DEFAULT: {
-						value: { _light: '#f9f9f9', _dark: '#303030' },
+						value: { _light: '#fbfbfb', _dark: '#252525' },
 					},
 				},
 				fg: {
@@ -20,15 +20,15 @@ const config = defineConfig({
 				aside: {
 					DEFAULT: {
 						value: {
-							_light: '{colors.gray.200}',
+							_light: '{colors.gray.100}',
 							_dark: '#1a1a1a',
 						},
 					},
 				},
-				card: {
+				emphasis: {
 					DEFAULT: {
 						value: {
-							_light: '{colors.gray.300}',
+							_light: '{colors.gray.200}',
 							_dark: '#111111',
 						},
 					},

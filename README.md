@@ -50,11 +50,11 @@ $ npm run build
 
 - Theme switch: Switch between the dark and light theme with a click on a button in navigational bar
 
-- Games grid: Explore videogames in a grid structure featuring games' ratings and platforms (12 items maximum at the current implementation)
+- Games grid: Explore videogames in a grid structure featuring games' ratings and platforms 12 items per page (improvement for future: add size of pages selector)
 
-- Games search: 
-  - Filters: Adjust filters to search for the games in particular genre or on a specific platform (PlayStation 3, iOS, Nintendo 3DS etc.)
-  - Search: Input game's name to search for all the titles consisting of the inserted value
-  - Sorting: View the games grid in an order by the chosen sorting method (by relevance and parameters, ascending and descending)
+- Games search:
+    - Filters: Adjust filters to search for the games in particular genre or on a specific platform (PlayStation 3, iOS, Nintendo 3DS etc.)
+    - Search: Input game's name to search for all the titles consisting of the inserted value
+    - Sorting: View the games grid in an order by the chosen sorting method (by relevance and parameters, ascending and descending)
 
 - Responsive design: you can use the application on different screens (genres are hidden for small devices at the current implementation)

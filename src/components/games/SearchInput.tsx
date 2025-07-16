@@ -1,6 +1,6 @@
-import { Input, InputGroup } from '@chakra-ui/react';
+import { IconButton, Input, InputGroup } from '@chakra-ui/react';
 import { useRef } from 'react';
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch, FaTimes } from 'react-icons/fa';
 
 function SearchInput({
 	onSearchChange,
@@ -9,10 +9,31 @@ function SearchInput({
 }>) {
 	const ref = useRef<HTMLInputElement | null>(null);
 	return (
-		<InputGroup startElement={<FaSearch />}>
+		<InputGroup
+			startElement={<FaSearch />}
+			endElement={
+				<IconButton
+					type="button"
+					rounded="full"
+					size="sm"
+					onClick={() => {
+						if (ref.current) {
+							ref.current.value = '';
+						}
+						onSearchChange('');
+					}}
+				>
+					<FaTimes />
+				</IconButton>
+			}
+			endElementProps={{
+				padding: 0,
+			}}
+		>
 			<Input
 				ref={ref}
-				variant="subtle"
+				// variant="subtle"
+				bg="emphasis"
 				borderRadius={30}
 				onKeyDown={(e) => {
 					if (e.key === 'Enter') {
