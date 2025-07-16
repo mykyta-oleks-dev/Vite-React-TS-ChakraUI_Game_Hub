@@ -8,7 +8,6 @@ type Props = Readonly<{
 	platforms: Platform[];
 }>;
 const PlatformIconsList = ({ parent_platforms, platforms }: Props) => {
-	console.log({ parent_platforms, platforms });
 	return (
 		<HStack gap={2} flexWrap="wrap">
 			{parent_platforms.map((p) => {

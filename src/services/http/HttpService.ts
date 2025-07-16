@@ -1,23 +1,33 @@
 import type { AxiosRequestConfig } from 'axios';
 import apiClient from './api-client';
 
+export interface Query {
+	page: number;
+	page_size: number;
+}
+
 class HttpService<T, R extends { results: T[] }> {
 	url: string;
 	constructor(url: string) {
 		this.url = url;
 	}
 
-	getAll(page = 1, pageSize = 12, config: AxiosRequestConfig = {}) {
+	getAll(config: AxiosRequestConfig = {}) {
 		const controller = new AbortController();
+
+		if (typeof config.params.page != 'number' || config.params.page <= 0) {
+			config.params.page = undefined;
+		}
+		if (
+			typeof config.params.page_size != 'number' ||
+			config.params.pageSize <= 0
+		) {
+			config.params.pageSize = undefined;
+		}
 
 		const request = apiClient.get<R>(this.url, {
 			...config,
 			signal: controller.signal,
-			params: {
-				...config.params,
-				page: page > 0 ? page : undefined,
-				page_size: pageSize > 0 ? pageSize : undefined,
-			},
 		});
 		return { request, cancel: () => controller.abort() };
 	}

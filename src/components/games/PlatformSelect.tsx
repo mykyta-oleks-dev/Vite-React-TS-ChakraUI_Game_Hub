@@ -9,7 +9,6 @@ import {
 	Text,
 	type SelectValueChangeDetails,
 } from '@chakra-ui/react';
-import { lazy } from 'react';
 
 type PlatformSelectProps = Readonly<{
 	selectedPlatforms: Platform[];
@@ -40,7 +39,7 @@ function PlatformSelect({
 	};
 
 	return (
-		<Box>
+		<Box flexGrow={2}>
 			{error && <Text color="red.500">{error}</Text>}
 			{loading ? (
 				<Spinner size="md" color="primary" />
@@ -53,6 +52,9 @@ function PlatformSelect({
 					variant="subtle"
 				>
 					<Select.HiddenSelect />
+					<Select.Label>
+						Choose platforms:
+					</Select.Label>
 					<Select.Control>
 						<Select.Trigger>
 							<Select.ValueText placeholder="Select Platforms" />

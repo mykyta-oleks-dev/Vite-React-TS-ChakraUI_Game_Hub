@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react';
 
 const useData = <T, R extends { results: T[] }>(
 	service: HttpService<T, R>,
-	page: number,
-	pageSize: number,
 	deps: unknown[],
 	params: Record<string, unknown> = {}
 ) => {
@@ -15,9 +13,7 @@ const useData = <T, R extends { results: T[] }>(
 
 	useEffect(() => {
 		setError('');
-		const { request, cancel } = service.getAll(page, pageSize, {
-			params,
-		});
+		const { request, cancel } = service.getAll({ params });
 		setLoading(true);
 
 		(async () => {

@@ -1,4 +1,4 @@
-import HttpService from './HttpService';
+import HttpService, { type Query } from './HttpService';
 import type { Genre } from './GenresService';
 import type { Platform } from './PlatformsService';
 
@@ -9,9 +9,9 @@ export interface Game {
 	metacritic: number | null;
 	rating: number;
 	rating_top: number;
-	background_image: string;
-	parent_platforms: { platform: Platform }[];
-	platforms: { platform: Platform }[];
+	background_image?: string;
+	parent_platforms?: { platform: Platform }[];
+	platforms?: { platform: Platform }[];
 }
 
 export interface GameDetails extends Game {
@@ -24,9 +24,11 @@ export interface GetGamesRequest {
 	results: Game[];
 }
 
-export interface GameQuery {
+export interface GameQuery extends Query {
 	genre: Genre | null;
 	platforms: Platform[];
+	sort: string;
+	search: string;
 }
 
 class GamesService extends HttpService<Game, GetGamesRequest> {

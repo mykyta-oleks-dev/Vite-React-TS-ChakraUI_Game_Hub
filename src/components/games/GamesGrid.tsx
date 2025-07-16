@@ -9,21 +9,14 @@ type GamesGridProps = Readonly<{
 }>;
 
 function GamesGrid({ query }: GamesGridProps) {
-	const page = 1;
-	const pageSize = 12;
-	const { data, error, loading } = useGames(
-		query.genre,
-		query.platforms,
-		page,
-		pageSize
-	);
+	const { data, error, loading } = useGames(query);
 	console.log({ data });
 
 	return (
 		<SimpleGrid columns={{ base: 1, sm: 2, md: 3, '2xl': 4 }} gap={4}>
 			{error && <Text color="red.500">{error}</Text>}
 			{loading ? (
-				[...Array(pageSize)].map((_, index) => (
+				[...Array(query.page_size)].map((_, index) => (
 					<CardSkeleton key={index} />
 				))
 			) : data.length > 0 ? (
