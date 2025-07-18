@@ -107,8 +107,6 @@ function App() {
 					</HStack>
 					<GamesGrid
 						query={query}
-						page={query.page}
-						pageSize={query.page_size}
 						onPageChange={handlePageChange}
 						onPageSizeChange={handlePageSizeChange}
 					/>
