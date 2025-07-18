@@ -1,0 +1,58 @@
+import HttpService from '@/services/http/HttpService';
+import { useQuery } from '@tanstack/react-query';
+
+const useQueryData = <T, R extends { results: T[]; count: number }>(
+	service: HttpService<T, R>,
+	key: string[],
+	params: Record<string, unknown> = {},
+	showPlaceholderData = false,
+	dataCallback?: (data: R) => void,
+	staleTime = 120_000,
+	gcTime = 180_000
+) =>
+	useQuery({
+		queryKey:
+			Object.keys(params).length > 0
+				? [...key, filterParams(params)]
+				: key,
+		queryFn: async ({ signal }) => {
+			const data = (await service.getAll({ params }, signal)).data;
+			dataCallback?.(data);
+			return data;
+		},
+		placeholderData: !showPlaceholderData ? (prev) => prev : undefined,
+		staleTime,
+		gcTime,
+	});
+
+const filterParams = (params: Record<string, unknown>) => {
+	const filteredEntries = Object.entries(params).filter(([, value]) => {
+		if (!value) {
+			return false;
+		}
+		if (typeof value === 'string' && value.trim() === '') {
+			return false;
+		}
+		if (Array.isArray(value) && value.length === 0) {
+			return false;
+		}
+
+		return true;
+	});
+
+	return Object.fromEntries(filteredEntries);
+};
+
+export default useQueryData;
+
+export const calculateTime = (
+	days: number = 0,
+	hours: number = 0,
+	minutes: number = 0,
+	seconds: number = 5
+) =>
+	Math.max(0, days) *
+	Math.max(0, hours) *
+	Math.max(0, minutes) *
+	Math.max(5, seconds) *
+	1000;

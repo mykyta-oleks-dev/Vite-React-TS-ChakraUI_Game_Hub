@@ -1,4 +1,4 @@
-import type { AxiosRequestConfig } from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import apiClient from './api-client';
 
 export interface Query {
@@ -12,7 +12,15 @@ class HttpService<T, R extends { results: T[] }> {
 		this.url = url;
 	}
 
-	getAll(config: AxiosRequestConfig = {}) {
+	getAll(config: AxiosRequestConfig): {
+		request: Promise<AxiosResponse<R>>;
+		cancel: () => void;
+	};
+	getAll(
+		config: AxiosRequestConfig,
+		signal: AbortSignal
+	): Promise<AxiosResponse<R>>;
+	getAll(config: AxiosRequestConfig = {}, signal?: AbortSignal) {
 		const controller = new AbortController();
 
 		if (typeof config.params.page != 'number' || config.params.page <= 0) {
@@ -27,16 +35,25 @@ class HttpService<T, R extends { results: T[] }> {
 
 		const request = apiClient.get<R>(this.url, {
 			...config,
-			signal: controller.signal,
+			signal: signal ?? controller.signal,
 		});
+
+		if (signal) return request;
 		return { request, cancel: () => controller.abort() };
 	}
 
-	getById(id: number) {
+	getById(id: number): {
+		request: Promise<AxiosResponse<T>>;
+		cancel: () => void;
+	};
+	getById(id: number, signal: AbortSignal): Promise<AxiosResponse<T>>;
+	getById(id: number, signal?: AbortSignal) {
 		const controller = new AbortController();
 		const request = apiClient.get<T>(`${this.url}/${id}`, {
-			signal: controller.signal,
+			signal: signal ?? controller.signal,
 		});
+
+		if (signal) return request;
 		return { request, cancel: () => controller.abort() };
 	}
 }

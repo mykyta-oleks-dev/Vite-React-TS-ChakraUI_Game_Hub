@@ -26,9 +26,7 @@ const GamesPagination = ({
 		>
 			<ButtonGroup variant="outline" size="sm">
 				<Pagination.PrevTrigger>
-					<IconButton>
-						<LuChevronLeft />
-					</IconButton>
+					<LuChevronLeft />
 				</Pagination.PrevTrigger>
 				<Pagination.Items
 					render={(p) => (
@@ -40,9 +38,7 @@ const GamesPagination = ({
 					)}
 				/>
 				<Pagination.NextTrigger>
-					<IconButton>
-						<LuChevronRight />
-					</IconButton>
+					<LuChevronRight />
 				</Pagination.NextTrigger>
 			</ButtonGroup>
 		</Pagination.Root>

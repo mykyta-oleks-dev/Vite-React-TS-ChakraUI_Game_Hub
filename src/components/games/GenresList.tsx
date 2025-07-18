@@ -1,4 +1,4 @@
-import useGenres from '@/hooks/useGenres';
+import useGenres from '@/hooks/v2/useGenres';
 import { type Genre } from '@/services/http/GenresService';
 import getCroppedImageUrl from '@/services/image-url';
 import { Button, HStack, Image, List, Spinner, Text } from '@chakra-ui/react';
@@ -10,7 +10,7 @@ function GenresList({
 	onGenreSelect: (genre: Genre | null) => void;
 	selectedGenre: Genre | null;
 }>) {
-	const { data, error, loading } = useGenres();
+	const { data, error, isPending: loading } = useGenres();
 
 	return (
 		<List.Root
@@ -25,12 +25,12 @@ function GenresList({
 			alignItems={loading ? 'center' : 'start'}
 			gap={2}
 		>
-			{error && <p>{error}</p>}
+			{error && <Text color="red.500">{error.message}</Text>}
 			{loading ? (
 				<Spinner size="xl" color="primary" />
 			) : (
 				<>
-					{data.map((genre) => (
+					{data?.results.map((genre) => (
 						<List.Item key={genre.id} width="100%">
 							<Button
 								variant={

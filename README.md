@@ -22,7 +22,7 @@ This is a project of a videogames discovery website "Game Hub" inspired by RAWG 
 
 - Axios - a promise-based HTTP Client for node.js and the browser
 
-Later will be updated with the addition of other technologies used.
+- TanStack Query (previously React Query) - a JavaScript library designed to simplify the complex task of data fetching and caching in React applications
 
 ## Installation
 
@@ -56,5 +56,7 @@ $ npm run build
     - Filters: Adjust filters to search for the games in particular genre or on a specific platform (PlayStation 3, iOS, Nintendo 3DS etc.)
     - Search: Input game's name to search for all the titles consisting of the inserted value
     - Sorting: View the games grid in an order by the chosen sorting method (by relevance and parameters, ascending and descending)
+
+- Runtime data caching: Switch faster between the pages that have already been loaded before during the session
 
 - Responsive design: you can use the application on different screens (genres are hidden for small devices at the current implementation)

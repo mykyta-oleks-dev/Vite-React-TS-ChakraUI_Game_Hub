@@ -1,4 +1,4 @@
-import usePlatforms from '@/hooks/usePlatforms';
+import usePlatforms from '@/hooks/v2/usePlatforms';
 import type { Platform } from '@/services/http/PlatformsService';
 import {
 	Box,
@@ -19,12 +19,13 @@ function PlatformSelect({
 	selectedPlatforms,
 	onPlatformSelect,
 }: PlatformSelectProps) {
-	const { data, error, loading } = usePlatforms();
+	const { data, error, isPending: loading } = usePlatforms();
 	const platforms = createListCollection({
-		items: data.map((platform) => ({
-			label: platform.name,
-			value: platform.slug,
-		})),
+		items:
+			data?.results.map((platform) => ({
+				label: platform.name,
+				value: platform.slug,
+			})) ?? [],
 	});
 
 	const handlePlatformChange = (details: SelectValueChangeDetails) => {
@@ -32,15 +33,15 @@ function PlatformSelect({
 			platforms.items.find((platform) => platform.value === value)
 		);
 		onPlatformSelect(
-			data.filter((platform) =>
+			data?.results.filter((platform) =>
 				selected.some((s) => s?.value === platform.slug)
-			)
+			) ?? []
 		);
 	};
 
 	return (
 		<Box flexGrow={2}>
-			{error && <Text color="red.500">{error}</Text>}
+			{error && <Text color="red.500">{error.message}</Text>}
 			{loading ? (
 				<Spinner size="md" color="primary" />
 			) : (
