@@ -1,20 +1,21 @@
+import useQueryStore from '@/stores/queryStore';
 import { ButtonGroup, IconButton, Pagination } from '@chakra-ui/react';
 import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
+import { useShallow } from 'zustand/react/shallow';
 
 type GamesPaginationProps = Readonly<{
 	count: number;
-	page: number;
-	pageSize: number;
-	onPageChange: (page: number) => void;
-	onPageSizeChange: (pageSize: number) => void;
 }>;
 
-const GamesPagination = ({
-	count,
-	page,
-	pageSize,
-	onPageChange,
-}: GamesPaginationProps) => {
+const GamesPagination = ({ count }: GamesPaginationProps) => {
+	const { page, pageSize, setPage } = useQueryStore(
+		useShallow((s) => ({
+			page: s.page,
+			pageSize: s.page_size,
+			setPage: s.setPage,
+		}))
+	);
+
 	return (
 		<Pagination.Root
 			count={count}
@@ -22,7 +23,7 @@ const GamesPagination = ({
 			pageSize={pageSize}
 			siblingCount={2}
 			marginBlock="auto"
-			onPageChange={(e) => onPageChange(e.page)}
+			onPageChange={(e) => setPage(e.page)}
 		>
 			<ButtonGroup variant="outline" size="sm">
 				<Pagination.PrevTrigger>

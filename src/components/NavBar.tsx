@@ -3,15 +3,11 @@ import logo from '../assets/logo.webp';
 import { ColorModeButton } from './ui/color-mode';
 import SearchInput from './games/SearchInput';
 
-const NavBar = ({
-	onSearchChange,
-}: Readonly<{
-	onSearchChange: (search: string) => void;
-}>) => {
+const NavBar = () => {
 	return (
 		<HStack as="nav">
 			<Image src={logo} boxSize="60px" />
-			<SearchInput onSearchChange={onSearchChange} />
+			<SearchInput />
 			<ColorModeButton marginStart="auto" />
 		</HStack>
 	);

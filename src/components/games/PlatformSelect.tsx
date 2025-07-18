@@ -1,5 +1,5 @@
 import usePlatforms from '@/hooks/v2/usePlatforms';
-import type { Platform } from '@/services/http/PlatformsService';
+import useQueryStore from '@/stores/queryStore';
 import {
 	Box,
 	createListCollection,
@@ -9,18 +9,11 @@ import {
 	Text,
 	type SelectValueChangeDetails,
 } from '@chakra-ui/react';
+import { useShallow } from 'zustand/react/shallow';
 
-type PlatformSelectProps = Readonly<{
-	selectedPlatforms: Platform[];
-	onPlatformSelect: (platforms: Platform[]) => void;
-}>;
-
-function PlatformSelect({
-	selectedPlatforms,
-	onPlatformSelect,
-}: PlatformSelectProps) {
+function PlatformSelect() {
 	const { data, error, isPending: loading } = usePlatforms();
-	const platforms = createListCollection({
+	const platformsOptions = createListCollection({
 		items:
 			data?.results.map((platform) => ({
 				label: platform.name,
@@ -28,11 +21,18 @@ function PlatformSelect({
 			})) ?? [],
 	});
 
+	const { platforms, setPlatforms } = useQueryStore(
+		useShallow((s) => ({
+			platforms: s.platforms,
+			setPlatforms: s.setPlatforms,
+		}))
+	);
+
 	const handlePlatformChange = (details: SelectValueChangeDetails) => {
 		const selected = details.value.map((value) =>
-			platforms.items.find((platform) => platform.value === value)
+			platformsOptions.items.find((platform) => platform.value === value)
 		);
-		onPlatformSelect(
+		setPlatforms(
 			data?.results.filter((platform) =>
 				selected.some((s) => s?.value === platform.slug)
 			) ?? []
@@ -47,8 +47,8 @@ function PlatformSelect({
 			) : (
 				<Select.Root
 					multiple
-					collection={platforms}
-					value={selectedPlatforms.map((p) => p.slug)}
+					collection={platformsOptions}
+					value={platforms.map((p) => p.slug)}
 					onValueChange={handlePlatformChange}
 				>
 					<Select.HiddenSelect />
@@ -65,7 +65,7 @@ function PlatformSelect({
 					<Portal>
 						<Select.Positioner>
 							<Select.Content>
-								{platforms.items.map((item) => (
+								{platformsOptions.items.map((item) => (
 									<Select.Item key={item.value} item={item}>
 										{item.label}
 									</Select.Item>

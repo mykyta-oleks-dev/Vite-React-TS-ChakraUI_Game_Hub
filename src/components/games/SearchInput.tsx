@@ -1,13 +1,12 @@
+import useQueryStore from '@/stores/queryStore';
 import { IconButton, Input, InputGroup } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { FaSearch, FaTimes } from 'react-icons/fa';
 
-function SearchInput({
-	onSearchChange,
-}: Readonly<{
-	onSearchChange: (search: string) => void;
-}>) {
+function SearchInput() {
 	const ref = useRef<HTMLInputElement | null>(null);
+	const setSearch = useQueryStore((s) => s.setSearch);
+
 	return (
 		<InputGroup
 			startElement={<FaSearch />}
@@ -20,7 +19,7 @@ function SearchInput({
 						if (ref.current) {
 							ref.current.value = '';
 						}
-						onSearchChange('');
+						setSearch('');
 					}}
 				>
 					<FaTimes />
@@ -37,7 +36,7 @@ function SearchInput({
 				borderRadius={30}
 				onKeyDown={(e) => {
 					if (e.key === 'Enter') {
-						onSearchChange(ref.current?.value ?? '');
+						setSearch(ref.current?.value ?? '');
 					}
 				}}
 				placeholder="Input game name"

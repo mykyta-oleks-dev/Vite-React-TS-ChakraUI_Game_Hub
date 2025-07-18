@@ -24,6 +24,8 @@ This is a project of a videogames discovery website "Game Hub" inspired by RAWG 
 
 - TanStack Query (previously React Query) - a JavaScript library designed to simplify the complex task of data fetching and caching in React applications
 
+- Zustand - "A small, fast, and scalable bearbones state management solution"
+
 ## Installation
 
 The project uses `npm` as the package manager.

@@ -2,60 +2,22 @@ import { Container, Grid, GridItem, Heading, HStack } from '@chakra-ui/react';
 import NavBar from './components/NavBar';
 import GamesGrid from './components/games/GamesGrid';
 import GenresList from './components/games/GenresList';
-import { useState } from 'react';
 import type { Genre } from './services/http/GenresService';
 import type { Platform } from './services/http/PlatformsService';
 import PlatformSelect from './components/games/PlatformSelect';
-import type { GameQuery } from './services/http/GamesService';
 import SortSelect from './components/games/SortSelect';
+import useQueryStore from './stores/queryStore';
+import { useShallow } from 'zustand/react/shallow';
 
 function App() {
-	const [query, setQuery] = useState<GameQuery>({
-		genre: null,
-		platforms: [],
-		sort: '',
-		page: 1,
-		page_size: 12,
-		search: '',
-	});
+	const { platforms, genre } = useQueryStore(
+		useShallow((s) => ({
+			platforms: s.platforms,
+			genre: s.genre,
+		}))
+	);
 
-	const handleGenreSelect = (genre: Genre | null) =>
-		setQuery({
-			...query,
-			genre,
-		});
-
-	const handlePlatformSelect = (platforms: Platform[]) =>
-		setQuery({
-			...query,
-			platforms,
-		});
-
-	const handleSortSelect = (sort: string) =>
-		setQuery({
-			...query,
-			sort,
-		});
-
-	const handleSearchChange = (search: string) =>
-		setQuery({
-			...query,
-			search,
-		});
-
-	const handlePageChange = (page: number) =>
-		setQuery({
-			...query,
-			page,
-		});
-
-	const handlePageSizeChange = (pageSize: number) =>
-		setQuery({
-			...query,
-			page_size: pageSize,
-		});
-
-	const heading = headingHelper(query);
+	const heading = headingHelper(platforms, genre);
 
 	return (
 		<Container maxW="container.xl">
@@ -72,17 +34,14 @@ function App() {
 				gap={4}
 			>
 				<GridItem area="nav" as="header">
-					<NavBar onSearchChange={handleSearchChange} />
+					<NavBar />
 				</GridItem>
 				<GridItem
 					area="aside"
 					display={{ base: 'none', lg: 'block' }}
 					as="aside"
 				>
-					<GenresList
-						onGenreSelect={handleGenreSelect}
-						selectedGenre={query.genre}
-					/>
+					<GenresList />
 				</GridItem>
 				<GridItem
 					area="main"
@@ -96,39 +55,29 @@ function App() {
 						{heading}
 					</Heading>
 					<HStack gap={4} w="100%" alignItems="end">
-						<PlatformSelect
-							selectedPlatforms={query.platforms}
-							onPlatformSelect={handlePlatformSelect}
-						/>
-						<SortSelect
-							sort={query.sort}
-							onSortSelect={handleSortSelect}
-						/>
+						<PlatformSelect />
+						<SortSelect />
 					</HStack>
-					<GamesGrid
-						query={query}
-						onPageChange={handlePageChange}
-						onPageSizeChange={handlePageSizeChange}
-					/>
+					<GamesGrid />
 				</GridItem>
 			</Grid>
 		</Container>
 	);
 }
 
-function headingHelper(query: GameQuery) {
+function headingHelper(platforms: Platform[], genre: Genre | null) {
 	let heading = '';
 
-	if (query.platforms.length > 0) {
-		query.platforms.forEach((p, i) => {
+	if (platforms.length > 0) {
+		platforms.forEach((p, i) => {
 			heading += p.name;
-			if (i < query.platforms.length - 2) heading += ',';
-			else if (i == query.platforms.length - 2) heading += ' and';
+			if (i < platforms.length - 2) heading += ',';
+			else if (i == platforms.length - 2) heading += ' and';
 			heading += ' ';
 		});
 	}
-	if (query.genre) {
-		heading += query.genre.name + ' ';
+	if (genre) {
+		heading += genre.name + ' ';
 	}
 
 	heading += 'Games';

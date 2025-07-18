@@ -1,11 +1,8 @@
+import useQueryStore from '@/stores/queryStore';
 import { Box, createListCollection, Portal, Select } from '@chakra-ui/react';
+import { useShallow } from 'zustand/react/shallow';
 
-type PlatformSelectProps = Readonly<{
-	sort: string;
-	onSortSelect: (type: string) => void;
-}>;
-
-function SortSelect({ sort, onSortSelect: setSort }: PlatformSelectProps) {
+function SortSelect() {
 	const collection = createListCollection({
 		items: [
 			{ label: 'Relevancy', value: '' },
@@ -19,6 +16,12 @@ function SortSelect({ sort, onSortSelect: setSort }: PlatformSelectProps) {
 			{ label: 'Metacritic Asc.', value: 'metacritic' },
 		],
 	});
+	const { sort, setSort } = useQueryStore(
+		useShallow((s) => ({
+			sort: s.sort,
+			setSort: s.setSort,
+		}))
+	);
 
 	return (
 		<Box flexGrow={1}>

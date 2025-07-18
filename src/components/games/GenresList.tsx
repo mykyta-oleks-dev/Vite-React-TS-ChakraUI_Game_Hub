@@ -1,16 +1,17 @@
 import useGenres from '@/hooks/v2/useGenres';
-import { type Genre } from '@/services/http/GenresService';
 import getCroppedImageUrl from '@/services/image-url';
+import useQueryStore from '@/stores/queryStore';
 import { Button, HStack, Image, List, Spinner, Text } from '@chakra-ui/react';
+import { useShallow } from 'zustand/react/shallow';
 
-function GenresList({
-	onGenreSelect,
-	selectedGenre,
-}: Readonly<{
-	onGenreSelect: (genre: Genre | null) => void;
-	selectedGenre: Genre | null;
-}>) {
+function GenresList() {
 	const { data, error, isPending: loading } = useGenres();
+	const { genre, setGenre } = useQueryStore(
+		useShallow((s) => ({
+			genre: s.genre,
+			setGenre: s.setGenre,
+		}))
+	);
 
 	return (
 		<List.Root
@@ -30,11 +31,11 @@ function GenresList({
 				<Spinner size="xl" color="primary" />
 			) : (
 				<>
-					{data?.results.map((genre) => (
-						<List.Item key={genre.id} width="100%">
+					{data?.results.map((dataGenre) => (
+						<List.Item key={dataGenre.id} width="100%">
 							<Button
 								variant={
-									selectedGenre?.id === genre.id
+									genre?.id === dataGenre.id
 										? 'solid'
 										: 'plain'
 								}
@@ -42,41 +43,41 @@ function GenresList({
 								border={0}
 								width="100%"
 								justifyContent="start"
-								onClick={() => onGenreSelect(genre)}
+								onClick={() => setGenre(dataGenre)}
 								_hover={{ textDecoration: 'underline' }}
 							>
 								<HStack>
 									<Image
 										src={getCroppedImageUrl(
-											genre.image_background
+											dataGenre.image_background
 										)}
-										alt={genre.name}
+										alt={dataGenre.name}
 										boxSize="32px"
 										objectFit="cover"
 										borderRadius="lg"
 									/>
 									<Text
 										fontWeight={
-											selectedGenre?.id === genre.id
+											genre?.id === dataGenre.id
 												? 'bold'
 												: 'medium'
 										}
 									>
-										{genre.name}
+										{dataGenre.name}
 									</Text>
 								</HStack>
 							</Button>
 						</List.Item>
 					))}
 					<List.Item key={-1} width="100%">
-						{selectedGenre && (
+						{genre && (
 							<Button
 								variant="plain"
 								padding={2}
 								border={0}
 								width="100%"
 								justifyContent="start"
-								onClick={() => onGenreSelect(null)}
+								onClick={() => setGenre(null)}
 								_hover={{ textDecoration: 'underline' }}
 							>
 								<Text fontSize="lg" color="gray.500">
