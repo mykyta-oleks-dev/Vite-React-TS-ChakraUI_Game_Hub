@@ -49,10 +49,14 @@ export const calculateTime = (
 	days: number = 0,
 	hours: number = 0,
 	minutes: number = 0,
-	seconds: number = 5
-) =>
-	Math.max(0, days) *
-	Math.max(0, hours) *
-	Math.max(0, minutes) *
-	Math.max(5, seconds) *
-	1000;
+	seconds: number = 0
+) => {
+	let timeSec = 0;
+
+	timeSec += days > 0 ? days * 24 * 60 * 60 : 0;
+	timeSec += hours > 0 ? Math.min(hours, 24) * 60 * 60 : 0;
+	timeSec += minutes > 0 ? Math.min(minutes, 60) * 60 : 0;
+	timeSec += seconds > 0 ? Math.min(seconds, 60) : timeSec > 0 ? 0 : 5;
+
+	return timeSec * 1000;
+};
