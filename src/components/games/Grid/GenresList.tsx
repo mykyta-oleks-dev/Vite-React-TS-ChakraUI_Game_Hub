@@ -16,7 +16,7 @@ function GenresList() {
 	return (
 		<List.Root
 			listStyle="none"
-			background="aside"
+			background="accent"
 			borderRadius={10}
 			padding={4}
 			minHeight={200}

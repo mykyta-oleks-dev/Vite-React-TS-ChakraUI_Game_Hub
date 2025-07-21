@@ -56,6 +56,26 @@ class HttpService<T, R extends { results: T[] }> {
 		if (signal) return request;
 		return { request, cancel: () => controller.abort() };
 	}
+
+	getBySlug<E extends T>(
+		slug: string
+	): {
+		request: Promise<AxiosResponse<E>>;
+		cancel: () => void;
+	};
+	getBySlug<E extends T>(
+		slug: string,
+		signal: AbortSignal
+	): Promise<AxiosResponse<E>>;
+	getBySlug<E extends T>(slug: string, signal?: AbortSignal) {
+		const controller = new AbortController();
+		const request = apiClient.get<E>(`${this.url}/${slug}`, {
+			signal: signal ?? controller.signal,
+		});
+
+		if (signal) return request;
+		return { request, cancel: () => controller.abort() };
+	}
 }
 
 export default HttpService;

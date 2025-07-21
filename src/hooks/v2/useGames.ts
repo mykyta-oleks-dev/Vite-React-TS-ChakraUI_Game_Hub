@@ -1,7 +1,7 @@
 import GamesService, { type GameQuery } from '@/services/http/GamesService';
 import useQueryData from './useQueryData';
 
-const useGames = (query: GameQuery, setCount: (count: number) => void) => {
+const useGames = (query: GameQuery, setCount?: (count: number) => void) => {
 	return useQueryData(
 		GamesService,
 		['games'],
@@ -17,7 +17,7 @@ const useGames = (query: GameQuery, setCount: (count: number) => void) => {
 			search: query.search,
 		},
 		true,
-		({ count }) => setCount(count ?? 1)
+		({ count }) => setCount?.(count ?? 1)
 	);
 };
 

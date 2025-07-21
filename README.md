@@ -26,6 +26,8 @@ This is a project of a videogames discovery website "Game Hub" inspired by RAWG 
 
 - Zustand - "A small, fast, and scalable bearbones state management solution"
 
+- React-Router - a standard library for creating dynamic routes and navigation in React JS Applications
+
 ## Installation
 
 The project uses `npm` as the package manager.
@@ -58,6 +60,8 @@ $ npm run build
     - Filters: Adjust filters to search for the games in particular genre or on a specific platform (PlayStation 3, iOS, Nintendo 3DS etc.)
     - Search: Input game's name to search for all the titles consisting of the inserted value
     - Sorting: View the games grid in an order by the chosen sorting method (by relevance and parameters, ascending and descending)
+
+- Game page: Explore more about the videogames with the screenshots slider, description and details, latest trailers on the dedicated pages accessible via routing and links on game cards
 
 - Runtime data caching: Switch faster between the pages that have already been loaded before during the session
 

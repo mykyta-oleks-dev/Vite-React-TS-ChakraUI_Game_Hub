@@ -2,10 +2,12 @@ import useQueryStore from '@/stores/queryStore';
 import { IconButton, Input, InputGroup } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { FaSearch, FaTimes } from 'react-icons/fa';
+import { useNavigate } from 'react-router';
 
 function SearchInput() {
 	const ref = useRef<HTMLInputElement | null>(null);
 	const setSearch = useQueryStore((s) => s.setSearch);
+	const navigate = useNavigate();
 
 	return (
 		<InputGroup
@@ -37,6 +39,7 @@ function SearchInput() {
 				onKeyDown={(e) => {
 					if (e.key === 'Enter') {
 						setSearch(ref.current?.value ?? '');
+						navigate('/');
 					}
 				}}
 				placeholder="Input game name"

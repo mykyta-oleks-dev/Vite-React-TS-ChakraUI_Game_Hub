@@ -1,9 +1,9 @@
 import useGames from '@/hooks/v2/useGames';
-import GameCard from './Card/GameCard';
+import GameCard from '@/components/games/Card/GameCard';
 import { SimpleGrid, Text, VStack } from '@chakra-ui/react';
-import CardSkeleton from './Card/CardSkeleton';
+import CardSkeleton from '@/components/games/Card/CardSkeleton';
 import GamesPagination from './GamesPagination';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useQueryStore from '@/stores/queryStore';
 
 function GamesGrid() {
@@ -11,7 +11,13 @@ function GamesGrid() {
 	const query = useQueryStore();
 	const { data, error, isPending: loading } = useGames(query, setCount);
 
-	if (error) return <Text color="red.500">{error.message}</Text>;
+	useEffect(() => {
+		if (data) setCount(data.count);
+	}, [data]);
+
+	if (error) throw error;
+
+	console.log(data);
 
 	return (
 		<VStack alignItems="center">
@@ -20,6 +26,7 @@ function GamesGrid() {
 				columns={{ base: 1, sm: 2, md: 3, '2xl': 4 }}
 				gap={4}
 				w="100%"
+				my={5}
 			>
 				{loading ? (
 					[...Array(query.page_size)].map((_, index) => (

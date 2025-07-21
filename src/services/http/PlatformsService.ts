@@ -1,15 +1,5 @@
+import type { Platform } from '@/entities/Platforms';
 import HttpService from './HttpService';
-
-export interface Platform {
-	id: number;
-	name: string;
-	slug: string;
-	games_count: number;
-	image_background: string;
-	image: string | null;
-	year_start: number | null;
-	year_end: number | null;
-}
 
 export interface GetPlatformsRequest {
 	count: number;

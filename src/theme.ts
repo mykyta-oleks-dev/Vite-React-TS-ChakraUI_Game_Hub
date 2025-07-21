@@ -17,7 +17,7 @@ const config = defineConfig({
 						value: { _light: '{colors.black}', _dark: '#e5e5e5' },
 					},
 				},
-				aside: {
+				accent: {
 					DEFAULT: {
 						value: {
 							_light: '{colors.gray.100}',

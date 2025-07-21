@@ -1,12 +1,8 @@
-import GamesService, {
-	type Game,
-	type GameQuery,
-	type GetGamesRequest,
-} from '@/services/http/GamesService';
+import GamesService, { type GameQuery } from '@/services/http/GamesService';
 import useData from './useData';
 
 const useGames = (query: GameQuery) =>
-	useData<Game, GetGamesRequest>(GamesService, [query], {
+	useData(GamesService, [query], {
 		genres: query.genre ? query.genre.id : undefined,
 		platforms:
 			query.platforms.length > 0

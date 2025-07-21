@@ -1,10 +1,6 @@
-import PlatformsService, {
-	type Platform,
-	type GetPlatformsRequest,
-} from '@/services/http/PlatformsService';
+import PlatformsService from '@/services/http/PlatformsService';
 import useData from './useData';
 
-const usePlatforms = () =>
-	useData<Platform, GetPlatformsRequest>(PlatformsService, []);
+const usePlatforms = () => useData(PlatformsService, []);
 
 export default usePlatforms;

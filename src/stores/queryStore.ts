@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { mountStoreDevtool } from 'simple-zustand-devtools';
-import type { Genre } from '@/services/http/GenresService';
-import type { Platform } from '@/services/http/PlatformsService';
+import type { Genre } from '@/entities/Genres';
+import type { Platform } from '@/entities/Platforms';
 
 interface QueryStore {
 	genre: Genre | null;

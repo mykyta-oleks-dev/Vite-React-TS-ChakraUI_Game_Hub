@@ -20,6 +20,7 @@ const useQueryData = <T, R extends { results: T[]; count: number }>(
 			dataCallback?.(data);
 			return data;
 		},
+
 		placeholderData: !showPlaceholderData ? (prev) => prev : undefined,
 		staleTime,
 		gcTime,
