@@ -13,9 +13,8 @@ const GameDetailsPage = () => {
 
 	if (error) throw error;
 
-	if (!data && loading) return <Spinner size="xl" />;
-
-	console.log(data);
+	if (!data && loading)
+		return <Spinner size="xl" alignSelf="center" my="auto" />;
 
 	const description_raw = data.description_raw;
 	const spanishStart = description_raw.indexOf('Español');
@@ -27,12 +26,15 @@ const GameDetailsPage = () => {
 
 	return (
 		<VStack gap={4} alignItems="stretch">
-			<Heading size="4xl" alignSelf="center">
-				<HStack alignItems="center" gap={2} flexShrink={0}>
-					{data.name}
-					<CriticScore score={data.metacritic ?? 0} />
-				</HStack>
-			</Heading>
+			<HStack
+				alignSelf="center"
+				alignItems="center"
+				gap={2}
+				flexShrink={0}
+			>
+				<Heading size="4xl">{data.name}</Heading>
+				<CriticScore score={data.metacritic ?? 0} />
+			</HStack>
 			<Screenshots slug={data.slug} />
 			<HStack gap={1} wrap="wrap">
 				{data.tags.map((t) => (

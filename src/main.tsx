@@ -5,6 +5,7 @@ import QueryProvider from './QueryProvider.tsx';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider } from 'react-router';
 import router from './routes/index.tsx';
+import './main.css';
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>

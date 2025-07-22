@@ -17,8 +17,6 @@ function GamesGrid() {
 
 	if (error) throw error;
 
-	console.log(data);
-
 	return (
 		<VStack alignItems="center">
 			{(data?.count || loading) && <GamesPagination count={count} />}

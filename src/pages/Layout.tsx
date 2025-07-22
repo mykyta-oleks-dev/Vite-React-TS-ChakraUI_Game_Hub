@@ -1,13 +1,14 @@
 import Footer from '@/components/Footer';
 import NavBar from '@/components/NavBar';
-import { Box, Container, VStack } from '@chakra-ui/react';
+import { Container, VStack } from '@chakra-ui/react';
 import { Outlet } from 'react-router';
 
 const Layout = () => {
 	return (
-		<Box>
+		<VStack height="100%">
 			<Container
 				maxW="container.xl"
+				flexGrow={1}
 				as={VStack}
 				gap={4}
 				alignItems="stretch"
@@ -16,7 +17,7 @@ const Layout = () => {
 				<Outlet />
 			</Container>
 			<Footer />
-		</Box>
+		</VStack>
 	);
 };
 

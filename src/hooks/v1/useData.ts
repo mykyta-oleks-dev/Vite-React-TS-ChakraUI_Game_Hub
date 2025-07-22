@@ -20,7 +20,6 @@ const useData = <T, R extends { results: T[]; count: number }>(
 		(async () => {
 			try {
 				const data = (await request).data;
-				console.log({ service, data });
 				setData(data.results);
 				setCount(data.count);
 				setLoading(false);

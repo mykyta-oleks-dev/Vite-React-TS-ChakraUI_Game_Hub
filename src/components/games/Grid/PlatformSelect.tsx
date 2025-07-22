@@ -40,10 +40,10 @@ function PlatformSelect() {
 	};
 
 	return (
-		<Box flexGrow={2}>
+		<Box flexGrow={2} display="flex">
 			{error && <Text color="red.500">{error.message}</Text>}
 			{loading ? (
-				<Spinner size="md" color="primary" />
+				<Spinner size="md" color="primary" mx="auto" my="auto" />
 			) : (
 				<Select.Root
 					multiple

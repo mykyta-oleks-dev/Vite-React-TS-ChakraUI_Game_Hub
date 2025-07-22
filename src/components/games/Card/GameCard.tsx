@@ -27,44 +27,50 @@ const GameCard = ({
 }: Props) => {
 	return (
 		<CardContainer>
-			<Image
-				src={
-					background_image
-						? getCroppedImageUrl(background_image)
-						: placeholder
-				}
-				alt={name}
-			/>
-			<Card.Body display="flex" flexDirection="column">
-				<HStack
-					marginBlockStart={0}
-					alignItems="center"
-					justifyContent="space-between"
-					marginBlockEnd={5}
-				>
-					<PlatformIconsList
-						parent_platforms={
-							parent_platforms?.map((p) => p.platform) ?? []
-						}
-						platforms={platforms?.map((p) => p.platform) ?? []}
-					/>
-					<CriticScore score={metacritic ?? 0} />
-				</HStack>
-				<Heading fontSize="2xl" fontWeight="bold" marginBlockEnd={2}>
-					<Link to={`/games/${slug}`}>{name}</Link>
-				</Heading>
-				<HStack
-					alignItems="center"
-					justifyContent="space-between"
-					marginBlockStart="auto"
-				>
-					<HStack alignItems="center" gap={1} flexShrink={0}>
-						<FaStar color="gold" />
-						<Text as="span">{rating}</Text>
+			<Link to={`/games/${slug}`}>
+				<Image
+					src={
+						background_image
+							? getCroppedImageUrl(background_image)
+							: placeholder
+					}
+					alt={name}
+				/>
+				<Card.Body display="flex" flexDirection="column">
+					<HStack
+						marginBlockStart={0}
+						alignItems="center"
+						justifyContent="space-between"
+						marginBlockEnd={5}
+					>
+						<PlatformIconsList
+							parent_platforms={
+								parent_platforms?.map((p) => p.platform) ?? []
+							}
+							platforms={platforms?.map((p) => p.platform) ?? []}
+						/>
+						<CriticScore score={metacritic ?? 0} />
 					</HStack>
-					<Emoji rating_top={rating_top} />
-				</HStack>
-			</Card.Body>
+					<Heading
+						fontSize="2xl"
+						fontWeight="bold"
+						marginBlockEnd={2}
+					>
+						{name}
+					</Heading>
+					<HStack
+						alignItems="center"
+						justifyContent="space-between"
+						marginBlockStart="auto"
+					>
+						<HStack alignItems="center" gap={1} flexShrink={0}>
+							<FaStar color="gold" />
+							<Text as="span">{rating}</Text>
+						</HStack>
+						<Emoji rating_top={rating_top} />
+					</HStack>
+				</Card.Body>
+			</Link>
 		</CardContainer>
 	);
 };
